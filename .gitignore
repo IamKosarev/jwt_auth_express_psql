@@ -3,6 +3,11 @@
 
 # production
 /build
+/dist
 
 #
-.idea
+/.idea
+
+#
+.env
+package-lock.json
