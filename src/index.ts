@@ -2,7 +2,10 @@ import express, { Application } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import { createConnection, DataSource } from "typeorm";
+import { DataSource } from "typeorm";
+import { Client } from "./entities/Client";
+import { Banker } from "./entities/Banker";
+import { Transaction } from "./entities/Transaction";
 
 dotenv.config();
 
@@ -22,7 +25,10 @@ const start = async () => {
          port: Number(process.env.POSTGRES_PORT),
          username: process.env.POSTGRES_USER,
          password: String(process.env.POSTGRES_PASSWORD),
-         database: process.env.POSTGRES_DB
+         database: process.env.POSTGRES_DB,
+         entities: [Client, Banker, Transaction],
+         synchronize: true,
+         logging: true,
       });
 
       const connection = await dataSource.initialize();
