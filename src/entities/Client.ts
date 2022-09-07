@@ -36,6 +36,12 @@ export class Client extends Person {
    })
    family_members: string[];
 
+
+   @Column({
+      type: "numeric"
+   })
+   balance: number;
+
    @ManyToMany(
       () => Banker
    )

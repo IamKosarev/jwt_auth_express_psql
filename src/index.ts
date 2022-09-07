@@ -6,6 +6,8 @@ import { DataSource } from "typeorm";
 import { Client } from "./entities/Client";
 import { Banker } from "./entities/Banker";
 import { Transaction } from "./entities/Transaction";
+import { createClientRouter } from "./routes/create_client";
+import { createBankerRouter } from "./routes/create_banker";
 
 dotenv.config();
 
@@ -30,9 +32,10 @@ const start = async () => {
          synchronize: true,
          logging: true,
       });
-
       const connection = await dataSource.initialize();
 
+      app.use(createClientRouter)
+      app.use(createBankerRouter)
 
       console.log("connected to database");
       app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

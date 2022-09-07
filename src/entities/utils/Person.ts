@@ -20,10 +20,6 @@ export class Person extends BaseEntity {
    @Column()
    last_name: string;
 
-
-   @Column()
-   middle_name: string;
-
    @Column({
       unique: true
    })
@@ -34,11 +30,6 @@ export class Person extends BaseEntity {
       length: 10
    })
    card_number: string;
-
-   @Column({
-      type: "numeric"
-   })
-   balance: number;
 
    @CreateDateColumn()
    created_at: Date;
