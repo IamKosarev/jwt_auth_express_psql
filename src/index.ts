@@ -8,6 +8,9 @@ import { Banker } from "./entities/Banker";
 import { Transaction } from "./entities/Transaction";
 import { createClientRouter } from "./routes/create_client";
 import { createBankerRouter } from "./routes/create_banker";
+import { createTransactionRouter } from "./routes/create_transaction";
+import { connectBankerToClient } from "./routes/connect_banker_to_client";
+import { deleteClientRouter } from "./routes/delete_client";
 
 dotenv.config();
 
@@ -30,12 +33,15 @@ const start = async () => {
          database: process.env.POSTGRES_DB,
          entities: [Client, Banker, Transaction],
          synchronize: true,
-         logging: true,
+         logging: false,
       });
       const connection = await dataSource.initialize();
 
       app.use(createClientRouter)
       app.use(createBankerRouter)
+      app.use(createTransactionRouter)
+      app.use(connectBankerToClient)
+      app.use(deleteClientRouter)
 
       console.log("connected to database");
       app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
