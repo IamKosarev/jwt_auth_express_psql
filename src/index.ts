@@ -11,6 +11,7 @@ import { createBankerRouter } from "./routes/create_banker";
 import { createTransactionRouter } from "./routes/create_transaction";
 import { connectBankerToClient } from "./routes/connect_banker_to_client";
 import { deleteClientRouter } from "./routes/delete_client";
+import { getClientById } from "./routes/get_client_by_id";
 
 dotenv.config();
 
@@ -37,11 +38,12 @@ const start = async () => {
       });
       const connection = await dataSource.initialize();
 
-      app.use(createClientRouter)
-      app.use(createBankerRouter)
-      app.use(createTransactionRouter)
-      app.use(connectBankerToClient)
-      app.use(deleteClientRouter)
+      app.use(createClientRouter);
+      app.use(createBankerRouter);
+      app.use(createTransactionRouter);
+      app.use(connectBankerToClient);
+      app.use(deleteClientRouter);
+      app.use(getClientById);
 
       console.log("connected to database");
       app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
