@@ -3,6 +3,8 @@ import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import { createConnection, DataSource } from "typeorm";
+import { Token } from "./models/token_model";
+import { User } from "./models/user_model";
 
 dotenv.config();
 
@@ -22,13 +24,16 @@ const start = async () => {
          port: Number(process.env.POSTGRES_PORT),
          username: process.env.POSTGRES_USER,
          password: String(process.env.POSTGRES_PASSWORD),
-         database: process.env.POSTGRES_DB
+         database: process.env.POSTGRES_DB,
+         entities: [User, Token],
+         synchronize: true,
+         logging: true,
       });
 
       const connection = await dataSource.initialize();
 
 
-      console.log("connected to database");
+      console.log(`connected to database ${process.env.POSTGRES_DB}`);
       app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
    } catch (e) {
       console.log(e);
