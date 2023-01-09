@@ -14,6 +14,5 @@ export class Token {
    @Column({ name: "refresh_token", type: "text" })
    refresh_token: string;
 
-   @OneToOne(() => User)
-   user: User
+
 }

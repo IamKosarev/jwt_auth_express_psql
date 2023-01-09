@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Token } from "./token_model";
 
 /*
@@ -25,5 +25,8 @@ export class User {
    @Column({ name: "activation_link", type: "text", nullable: true })
    activation_link: string;
 
-   token: Token;
+   @OneToOne(() => Token)
+   @JoinColumn()
+   token: Token
+
 }
