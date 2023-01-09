@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, JoinColumn, OneToOne, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 import { User } from "./user_model";
 
 /*
@@ -7,12 +7,11 @@ import { User } from "./user_model";
  */
 
 @Entity()
-export class Token {
-   @PrimaryGeneratedColumn("uuid")
+export class Token extends BaseEntity {
+
+   @PrimaryGeneratedColumn()
    id: string
 
    @Column({ name: "refresh_token", type: "text" })
    refresh_token: string;
-
-
 }

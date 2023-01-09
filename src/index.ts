@@ -2,9 +2,10 @@ import express, { Application } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import { createConnection, DataSource } from "typeorm";
+import { DataSource } from "typeorm";
 import { Token } from "./models/token_model";
 import { User } from "./models/user_model";
+import { router } from "./router";
 
 dotenv.config();
 
@@ -15,6 +16,7 @@ const app: Application = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
+app.use("/api/v1", router);
 
 const start = async () => {
    try {
@@ -31,7 +33,6 @@ const start = async () => {
       });
 
       const connection = await dataSource.initialize();
-
 
       console.log(`connected to database ${process.env.POSTGRES_DB}`);
       app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

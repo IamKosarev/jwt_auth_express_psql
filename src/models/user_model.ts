@@ -1,4 +1,11 @@
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import {
+   BaseEntity,
+   Column,
+   Entity,
+   JoinColumn,
+   OneToOne,
+   PrimaryGeneratedColumn,
+} from "typeorm";
 import { Token } from "./token_model";
 
 /*
@@ -9,7 +16,7 @@ import { Token } from "./token_model";
  */
 
 @Entity("user")
-export class User {
+export class User extends BaseEntity {
    @PrimaryGeneratedColumn("uuid")
    id: string;
 
@@ -27,6 +34,5 @@ export class User {
 
    @OneToOne(() => Token)
    @JoinColumn()
-   token: Token
-
+   token: Token;
 }
